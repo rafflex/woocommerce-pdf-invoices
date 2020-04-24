@@ -348,6 +348,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 						wp_die( 'PDF invoice not found.' );
 					}
 
+                    if (stripos($full_path, 'http') === 0) {
+                        wp_redirect($full_path);
+                        exit;
+                    }
+
 					BEWPI_Invoice::view( $full_path );
 					break;
 				case 'view_packing_slip':
