@@ -323,6 +323,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				return false;
 			}
 
+            $full_path = apply_filters('bewpi_override_attachment_path', $full_path);
+
 			return $full_path;
 		}
 
