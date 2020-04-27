@@ -78,11 +78,13 @@ if (!defined('_MPDF_TEMP_PATH')) {
 }
 
 if (!defined('_MPDF_TTFONTPATH')) {
-	define('_MPDF_TTFONTPATH', _MPDF_PATH . 'ttfonts/');
+    $mPdfPath = apply_filters('mpdf_set_font_path', _MPDF_PATH);
+	define('_MPDF_TTFONTPATH', $mPdfPath . 'ttfonts/');
 }
 
 if (!defined('_MPDF_TTFONTDATAPATH')) {
-	define('_MPDF_TTFONTDATAPATH', _MPDF_PATH . 'ttfontdata/');
+    $mPdfPath = apply_filters('mpdf_set_font_path', _MPDF_PATH);
+	define('_MPDF_TTFONTDATAPATH', $mPdfPath . 'ttfontdata/');
 }
 
 $errorlevel = error_reporting();
@@ -9437,6 +9439,7 @@ class mPDF
 					break;
 				case 'F':
 					//Save to local file
+                    $name = apply_filters('mpdf_rewrite_cdn_url_as_local_file', $name);
 					$f = fopen($name, 'wb');
 					if (!$f)
 						throw new MpdfException('Unable to create output file: ' . $name);

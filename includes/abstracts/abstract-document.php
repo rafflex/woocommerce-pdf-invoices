@@ -96,8 +96,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param string $destination Destination mode for file.
 		 */
 		public function generate( $destination = 'F' ) {
-			// Use ttfontdata from uploads folder.
-			define( '_MPDF_TTFONTDATAPATH', WPI_UPLOADS_DIR . '/mpdf/ttfontdata/' );
+			// Override the default fonts folder
+            $mPdfPath = apply_filters('mpdf_set_font_path', WPI_UPLOADS_DIR . '/mpdf');
+            define( '_MPDF_TTFONTDATAPATH', $mPdfPath . 'ttfontdata/' );
 
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
@@ -273,7 +274,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		protected static function delete( $full_path ) {
 			if ( file_exists( $full_path ) ) {
 				wp_delete_file( $full_path );
-			}
+			} elseif (stripos($full_path, 'http') === 0) {
+			    do_action('lrt_delete_file_from_s3', $full_path);
+            }
 		}
 
 		/**
