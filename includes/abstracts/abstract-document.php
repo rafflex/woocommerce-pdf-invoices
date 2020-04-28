@@ -324,11 +324,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @return bool/string false when pdf does not exist else full path to pdf.
 		 */
 		public static function exists( $full_path ) {
+		    if (stripos($full_path, 'http') === 0) {
+		        return $full_path;
+            }
+
 			if ( ! file_exists( $full_path ) ) {
 				return false;
 			}
-
-            $full_path = apply_filters('bewpi_override_attachment_path', $full_path);
 
 			return $full_path;
 		}
