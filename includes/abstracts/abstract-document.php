@@ -205,7 +205,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$name = $this->filename;
 			}
 
-			$mpdf->Output( $name, $destination );
+            if ($mpdf) {
+                $mpdf->Output( $name, $destination );
+            }
 
 			if ( 'F' !== $destination ) {
 				exit;
