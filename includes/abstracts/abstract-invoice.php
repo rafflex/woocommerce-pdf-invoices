@@ -390,6 +390,11 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 			return false;
 		}
 
+		$cdnUrl = apply_filters('bewpi_get_cdn_url_if_exists', $order_id);
+		if ($cdnUrl) {
+            return parent::exists($cdnUrl);
+        }
+
 		return parent::exists( WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
 	}
 
