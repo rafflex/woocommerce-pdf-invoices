@@ -22,19 +22,9 @@
       "xrstf\\Composer52\\Generator::onPostInstallCmd"
     ]
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/baselbers/mpdf"
-    }
-  ],
   "require": {
     "php": ">=5.2.14",
-    "xrstf/composer-php52": "1.*",
-    "mpdf/mpdf": "dev-mpdf"
-  },
-  "require-dev": {
-    "wp-coding-standards/wpcs": "dev-master"
+    "xrstf/composer-php52": "1.*"
   },
   "autoload": {
     "classmap": [
